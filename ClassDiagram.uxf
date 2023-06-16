@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>208</x>
+      <y>16</y>
+      <w>576</w>
+      <h>560</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;APawn&gt;&gt;
+ASimplePawn
+--
+ /*The Pawns SceneComponent. This will be set as the Root Component*/
+UPROPERTY(EditAnywhere, Category="My Pawn")
+*+ SceneComponent : USceneComponent**
+
+ /*The pawns StaticMeshComponent, this will the Pawns visual*/
+UPROPERTY(EditAnywhere, Category = "My Pawn")
+*+ StaticMeshComponent : UStaticMeshComponent**
+
+ /*The pawns SpringArmComponent, this is the camera boom and will be attached to the RootComponent*/
+UPROPERTY(EditAnywhere, Category = "My Pawn")
+*+ SpringArmComponent : USpringArmComponent**
+
+ /*The pawns CameraComponent, this will be attached to the SpringArmComponent*/
+UPROPERTY(EditAnywhere, Category = "My Pawn")
+*+ CameraComponent : UCameraComponent**
+
+ /*The pawns velocity modifier*/
+UPROPERTY(EditAnywhere, Category = "My Pawn")
+*+ Velocity : float = 300.0f*
+
+ /*The Pawns Move Forward Amount per frame*/
+*- MoveForwardAmount : float = 0*
+ /*The Pawns Move Right Amount per frame*/
+*- MoveRightAmount : float = 0*
+--
+*+ ASimplePawn()*
+
+ /*Called when this pawn is posessed by a Player Controller*/
+*+ &lt;virtual override&gt; PossessedBy(NewController : AController*) : void*
+ /*Called when this pawn is un-posessed by a Player Controller*/
+*+	&lt;virtual override&gt; UnPossessed() : void*
+
+*+ &lt;virtual override&gt; Tick(DeltaTime : float) : void*
+*+ &lt;virtual override&gt; SetupPlayerInputComponent(PlayerInputComponent : UInputComponent*) : void*
+
+*# &lt;virtual override&gt; BeginPlay() : void*
+
+ /*The Callback function for the MoveForward Input Axis Event*/
+*-  MoveForward(Amount : float) : void*
+ /*The Callback function for the MoveRight Input Axis Event*/
+*-  MoveRight(Amount : float) : void*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>192</x>
+      <y>640</y>
+      <w>552</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ASimplePawn&gt;&gt;
+ACustomMovementPawn
+--
+UPROPERTY(EditAnywhere, Category = "My Pawn")
+*+ SimpleMovementComponent : UCustomMovementComponent**
+--
+*+ ACustomMovementPawn()*
+ /*Called to bind functionality to input*/
+*+	&lt;virtual override&gt; SetupPlayerInputComponent(PlayerInputComponent : UInputComponent*)  : void*
+
+ /*The Callback function for the MoveForward Input Axis Event*/
+*+	&lt;virtual override&gt; MoveForward(Amount : float) : void*
+
+ /*The Callback function for the MoveRight Input Axis Event*/
+*+	&lt;virtual override&gt; MoveRight(Amount : float) : void*
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1024</x>
+      <y>56</y>
+      <w>360</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;APlayerController&gt;&gt;
+AMyPlayerController
+--
+ /*Array of Pawns In the level*/
+UPROPERTY()
+*- Pawns : TArray&lt;AActor*&gt;*
+
+ /*The CurrentPawns Index*/
+*- CurrentPawnIndex : int32 = 0*
+--
+ /*Called to bind functionality to input*/
+*# &lt;virtual override&gt; SetupInputComponent() : void*
+ /*Called to when the game starts*/
+*# &lt;virtual override&gt; BeginPlay()  : void*
+
+ /*The Callback function for the ChangePawn Input Action Event*/
+*- 	ChangePawn() : void*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>872</x>
+      <y>680</y>
+      <w>752</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UPawnMovementComponent&gt;&gt;
+UCustomMovementComponent
+--
+ /*The Pawns Movement Speed */
+UPROPERTY(EditAnywhere, Category = "Movement Properties")
+*+ Speed : float = 500*
+--
+*+ &lt;virtual override&gt; TickComponent(DeltaTime : float, TickType : ELevelTick, ThisTickFunction : FActorComponentTickFunction*) : void*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>568</y>
+      <w>24</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>736</x>
+      <y>712</y>
+      <w>152</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1
+Has a</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>776</x>
+      <y>152</y>
+      <w>264</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..
+Posseses a Pawn</panel_attributes>
+    <additional_attributes>10.0;80.0;310.0;10.0</additional_attributes>
+  </element>
+</diagram>

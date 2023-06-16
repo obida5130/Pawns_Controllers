@@ -18,23 +18,23 @@ ASimplePawn::ASimplePawn()
 
 	//TODO: Create the component hierarchy in for this actor. What does the hierarchy look like. Draw it out on paper
 	//CREATE scene component
-	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Scene Component"));
+	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("USceneComponent"));
 	
 	//SET the Scene Component as the  Root Component
 	RootComponent = SceneComponent;
 	//CREATE Static Mesh Component
-	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
+	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComponent"));
 
 	//ATTACH the Static Mesh Component to the Root Component
 	StaticMeshComponent->SetupAttachment(RootComponent);
 	//CREATE Spring Arm Component
-	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
+	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComponent"));
 
 	//ATTACH the Spring Arm Component to the Root Component
 	SpringArmComponent->SetupAttachment(RootComponent);
 
 	//CREATE Camera Component
-	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
 
 	//ATTACH the Spring Arm Component to the Spring Arm Component
 	CameraComponent->SetupAttachment(SpringArmComponent, USpringArmComponent::SocketName);
